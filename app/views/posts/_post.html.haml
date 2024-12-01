@@ -1,4 +1,4 @@
 
-.div
-  = form.label :body
-  = form.text_field :body
+- unless post.archived?
+  %p
+    = post.body
