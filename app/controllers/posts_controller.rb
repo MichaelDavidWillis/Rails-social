@@ -8,6 +8,6 @@ class PostsController < ApplicationController#
 private
 
   def post_params
-    params.expect(post: [ :posted_by, :body ])
+    params.expect(post: [ :body ])
   end
 end
