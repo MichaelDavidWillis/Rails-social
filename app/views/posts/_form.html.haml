@@ -1,0 +1,10 @@
+%h3
+  Add a post:
+
+= form_with model: [ @user, @user.posts.build ] do |form|
+  .div
+    = form.label :body
+    = form.text_field :body
+
+  .div
+    = form.submit

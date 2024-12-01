@@ -8,16 +8,7 @@
   %li 
     = link_to "Delete", user_path(@user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
 
-%h3
-  Add a post:
-
-= form_with model: [ @user, @user.posts.build ] do |form|
-  .div
-    = form.label :body
-    = form.text_field :body
-
-  .div
-    = form.submit
+= render "posts/form", user: @user
 
 %h3
   Posts:
