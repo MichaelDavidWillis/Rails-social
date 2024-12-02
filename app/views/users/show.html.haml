@@ -1,6 +1,9 @@
 %h2
   This is #{@user.first_name}'s page
 
+%p
+  = image_tag(url_for(@user.image), width: 150)
+
 %ul
   %li 
     = link_to "Edit", edit_user_path(@user)

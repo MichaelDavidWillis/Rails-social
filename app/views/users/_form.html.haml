@@ -17,5 +17,11 @@
     = @user.errors.full_messages_for(:email).each do |message|
       .div
         = message
+  .div 
+    = form.label :image, "Upload Image"
+    = form.file_field :image
+    = @user.errors.full_messages_for(:image).each do |message|
+      .div
+        = message
   .div
     = form.submit
