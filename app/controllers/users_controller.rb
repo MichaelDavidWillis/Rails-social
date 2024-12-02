@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  http_basic_authenticate_with name: "me", password: "pass", except: [ :index, :show ]
+
   def index
     @users = User.all
   end
@@ -22,7 +24,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id]) 
+    @user = User.find(params[:id])
   end
 
   def update
@@ -44,7 +46,6 @@ class UsersController < ApplicationController
 
 private
   def user_params
-    params.expect(user: [:first_name, :second_name, :email])
+    params.expect(user: [ :first_name, :second_name, :email ])
   end
-
 end

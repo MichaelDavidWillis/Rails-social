@@ -1,4 +1,6 @@
 class PostsController < ApplicationController#
+  http_basic_authenticate_with name: "me", password: "pass", only: :destroy
+
   def create
     @user = User.find(params[:user_id])
     @post = @user.posts.create(post_params)
