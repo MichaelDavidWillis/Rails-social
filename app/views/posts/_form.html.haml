@@ -1,7 +1,7 @@
 %h3
   Add a post:
 
-= form_with model: [ @user, @user.posts.build ] do |form|
+= form_with model: [ @user, Post.new ] do |form|
     
   .div
     = form.label :status

@@ -13,4 +13,4 @@
 %h3
   Posts:
 
-= render @user.posts
+= render @user.posts unless @user.posts.empty?
