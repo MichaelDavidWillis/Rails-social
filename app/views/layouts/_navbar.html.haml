@@ -1,0 +1,16 @@
+%nav.navbar.navbar-expand-lg
+  %a.navbar-brand{ href: root_path } Navbar
+  %button.navbar-toggler{ type: "button", "data-bs-toggle": "collapse", "data-bs-target": "#navbarNavDropdown", "aria-controls": "navbarNavDropdown", "aria-expanded": "false", "aria-label": "Toggle navigation" }
+    %span.navbar-toggler-icon
+  #navbarNavDropdown.collapse.navbar-collapse
+    %ul.navbar-nav
+      %li.nav-item.dropdown
+        %a.nav-link.dropdown-toggle{ role: "button", "data-bs-toggle": "dropdown", "aria-expanded": "false", id: "navbarDropdownMenuLink" }
+          Dropdown link
+        %ul.dropdown-menu{ "aria-labelledby": "navbarDropdownMenuLink" }
+          %li
+            %a.dropdown-item{ href: "#" } Action
+          %li
+            %a.dropdown-item{ href: "#" } Another action
+          %li
+            %a.dropdown-item{ href: "#" } Something else here
