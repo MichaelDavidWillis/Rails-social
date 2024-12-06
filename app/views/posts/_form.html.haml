@@ -1,15 +1,13 @@
 %h3
   Add a post:
 
-= form_with model: [ @user, Post.new ] do |form|
-    
-  .div
-    = form.label :status
-    = form.select :status, Visible::VALID_STATUSES, selected: 'public'
-    
-  .div
-    = form.label :body
-    = form.text_field :body
+= form_with model: [ @user, Post.new ], class: "input-group m-3" do |form|
 
-  .div
-    = form.submit
+  = form.select :status, Visible::VALID_STATUSES, { selected: 'public' }, { class: 'form-select', id: 'post-status' }
+  = form.text_field :body, class: "form-control w-75", "aria-label": "Body"
+  = form.submit value: "Post", class: "btn btn-secondary "
+
+:javascript
+  $('#status-dropdown li').click(function(){
+    $('#dropdownButton').html($(this).text() + '<span class="caret"></span>')
+  })

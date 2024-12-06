@@ -1,0 +1,9 @@
+.row
+  .col
+    = image_tag(url_for(@user.image), width: 150)
+  .col
+    %ul
+      %li 
+        = link_to "Edit", edit_user_path(@user)
+      %li 
+        = link_to "Delete", user_path(@user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
