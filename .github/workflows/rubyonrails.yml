@@ -22,6 +22,8 @@ jobs:
         with:
           bundler-cache: true
       # Add or replace database setup steps here
+      - name: Fix executable permissions
+        run: chmod +x bin/rails
       - name: Debug SQLite database
         run: ls -l db/
       - name: Set up database
