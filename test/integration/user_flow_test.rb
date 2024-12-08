@@ -1,31 +1,30 @@
 require "test_helper"
 
 class UserFlowTest < ActionDispatch::IntegrationTest
-  http_login = {
-    "Authorization" => ActionController::HttpAuthentication::Basic.encode_credentials("me", "pass")
-  }
-  test_user = {
-    user: {
-      first_name: "can",
-      second_name: "create",
-      email: "user@successfully",
-      image: { io: File.open(Rails.root.join("test/fixtures/files/test.png")), filename: "test.png", content_type: "image/png" }
-    }
-  }
   test "can see the welcome page" do
     get "/"
+    assert_response :success
     assert_select "nav.navbar"
     assert_select "link"
+  end
+
+  test "can access a user's show page" do
+    test_user = get_new_user
+
+    get "/users/#{test_user.id}"
+    assert_response :success
+    assert_select "h2", "This is Example's page"
   end
 
   test "can create a user" do
     get "/users/new", headers: http_login
     assert_response :success
+    assert_select "form"
 
-    post "/users", params: test_user, headers: http_login
+    post "/users", params: get_new_user_in_json_format, headers: http_login
     assert_response :redirect
     follow_redirect!
     assert_response :success
-    assert_select "h2", "This is can's page"
+    assert_select "h2", "This is Example's page"
   end
 end

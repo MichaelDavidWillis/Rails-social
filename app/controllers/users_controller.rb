@@ -39,9 +39,11 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
-
-    redirect_to root_path, status: :see_other
+    if @user.destroy
+      redirect_to root_path, status: :see_other
+    else
+      render :delete, status: :unprocessable_entity
+    end
   end
 
 private

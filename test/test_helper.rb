@@ -15,6 +15,16 @@ module ActiveSupport
       { io: File.open(Rails.root.join("test/fixtures/files/test.png")), filename: "test.png", content_type: "image/png" }
     end
 
+    def get_new_user
+      test_user = User.new
+      test_user.first_name = "Example"
+      test_user.second_name = "eg"
+      test_user.email = "foo@bar.com"
+      test_user.image.attach(get_test_image)
+      test_user.save
+      test_user
+    end
+
     def get_new_user_not_saved
       test_user = User.new
       test_user.first_name = "Example"
@@ -24,14 +34,23 @@ module ActiveSupport
       test_user
     end
 
-    def get_new_user
-      test_user = User.new
-      test_user.first_name = "Example"
-      test_user.second_name = "eg"
-      test_user.email = "foo@bar.com"
-      test_user.image.attach(get_test_image)
-      test_user.save
-      test_user
+    def get_new_user_in_json_format
+      {
+        user: {
+          first_name: "Example",
+          second_name: "eg",
+          email: "foo@bar.com",
+          image: { io: File.open(Rails.root.join("test/fixtures/files/test.png")), filename: "test.png", content_type: "image/png" }
+        }
+      }
+    end
+
+    def get_new_post_in_json_format
+      { post: { body: "hi", status: "public" } }
+    end
+
+    def http_login
+      { "Authorization" => ActionController::HttpAuthentication::Basic.encode_credentials("me", "pass") }
     end
   end
 end
