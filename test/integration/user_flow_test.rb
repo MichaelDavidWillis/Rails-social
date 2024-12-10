@@ -19,7 +19,9 @@ class UserFlowTest < ActionDispatch::IntegrationTest
   test "can create a user" do
     get "/users/new", headers: http_login
     assert_response :success
-    assert_select "form"
+    assert_select "form" do
+      assert_select "label", 4
+    end
 
     post "/users", params: get_new_user_in_json_format, headers: http_login
     assert_response :redirect
