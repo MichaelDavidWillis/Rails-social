@@ -1,0 +1,7 @@
+-# locals: (name:, form:)
+
+= form.label name.to_s, class: "form-label"
+= form.text_field name.to_s, class: "form-control"
+- @user.errors.full_messages_for(name.to_s).each do |message|
+  .container.form-text.text-muted
+    = message
