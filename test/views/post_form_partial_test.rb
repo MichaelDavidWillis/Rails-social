@@ -5,7 +5,9 @@ class PostFormPartialTest < ActionView::TestCase
   end
 
   test "renders a status select button" do
-    assert_select "select", { type: "submit", name: "post[status]", class: "form-select" } do
+    assert_select "select" do
+      assert_select "[name=?]", "post[status]"
+      assert_select "[class=?]", "form-select"
       Visible::VALID_STATUSES.each do |status|
         assert_select "option", { value: status }
       end
@@ -14,10 +16,22 @@ class PostFormPartialTest < ActionView::TestCase
   end
 
   test "renders a body for text" do
-    assert_select "input", { type: "text", name: "post[body]", class: "form-control w-75" }
+    assert_select "input" do
+      assert_select "[name=?]", "post[body]" do
+        assert_select "[type=?]", "text"
+        assert_select "[class=?]", "form-control w-75"
+      end
+    end
   end
 
   test "renders a submit button" do
-    assert_select "input", { type: "submit", value: "Post", class: "btn btn-secondary" }
+    assert_select "input" do
+      assert_select "[name=?]", "commit" do
+        # assert_select "[type=?]", "text" # fails as the item with the name commit does not contain a type of text
+        assert_select "[type=?]", "submit"
+        # assert_select "[value=?]", "text" # fails as the item with the name commit does not contain a value of text
+        assert_select "[value=?]", "Post"
+      end
+    end
   end
 end
